@@ -2,7 +2,7 @@
   "name": "@sajanv88/react-calendar",
   "version": "1.0.0",
   "type": "module",
-  "description": "A simple and reusable calendar component for React.",
+  "description": "A beautiful, fully-featured calendar component for React with month, week, day, and year views.",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -51,9 +51,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sajanv88/react-libraries"
+    "url": "https://github.com/sajanv88/react-calendar"
   },
-  "homepage": "https://github.com/sajanv88/react-libraries#readme",
+  "homepage": "https://github.com/sajanv88/react-calendar#readme",
   "packageManager": "pnpm@10.28.2",
   "peerDependencies": {
     "react": ">=18",
