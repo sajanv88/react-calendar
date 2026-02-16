@@ -1,0 +1,78 @@
+{
+  "name": "@sajanv88/react-calendar",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A simple and reusable calendar component for React.",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./style.css": "./dist/react-calendar.css"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run build",
+    "lint": "biome lint ./src",
+    "lint:fix": "biome lint --write --unsafe ./src",
+    "format": "biome format ./src",
+    "format:fix": "biome format --write ./src",
+    "check": "biome check ./src",
+    "check:fix": "biome check --write --unsafe ./src"
+  },
+  "keywords": [
+    "react-component",
+    "calendar",
+    "event-scheduling",
+    "date",
+    "scheduler",
+    "tailwindcss",
+    "react"
+  ],
+  "author": "Sajan <work@sajankumarv.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sajanv88/react-libraries"
+  },
+  "homepage": "https://github.com/sajanv88/react-libraries#readme",
+  "packageManager": "pnpm@10.28.2",
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.0",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/node": "^25.2.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.7.0",
+    "autoprefixer": "^10.4.24",
+    "postcss": "^8.5.6",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vite-plugin-dts": "^4.5.4"
+  }
+}
