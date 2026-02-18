@@ -1,20 +1,20 @@
-# @sajanv88/react-calendar
+# @sajankumarv88/react-calendar
 
 A beautiful, fully-featured calendar component for React with month, week, day, and year views.
 
 ## Installation
 
 ```bash
-npm install @sajanv88/react-calendar
+npm install @sajankumarv88/react-calendar
 # or
-pnpm add @sajanv88/react-calendar
+pnpm add @sajankumarv88/react-calendar
 ```
 
 ## Usage
 
 ```tsx
-import { Calendar } from "@sajanv88/react-calendar";
-import "@sajanv88/react-calendar/style.css";
+import { Calendar } from "@sajankumarv88/react-calendar";
+import "@sajankumarv88/react-calendar/style.css";
 
 function App() {
   const events = [

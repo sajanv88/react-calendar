@@ -109,7 +109,7 @@ jobs:
       
       - name: Publish to NPM (Scoped Package)
         run: |
-          echo "Publishing scoped package @sajanv88/react-calendar..."
+          echo "Publishing scoped package @sajankumarv88/react-calendar..."
           pnpm publish --no-git-checks --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
