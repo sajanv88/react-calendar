@@ -119,6 +119,10 @@ function MyCalendar() {
 - `react` >= 18
 - `react-dom` >= 18
 
+
+## Contact
+- [Email](work@sajankumarv.com)
+
 ## License
 
 MIT
