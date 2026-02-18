@@ -72,7 +72,6 @@ const sampleEvents: CalendarEvent[] = [
 function App() {
     const [events, setEvents] = useState<CalendarEvent[]>(sampleEvents);
 
-    const [theme, setTheme] = useState<"light" | "dark">("light");
 
     const handleEventAdd = (event: CalendarEvent) => {
         console.log("New event added:", event);
@@ -101,7 +100,6 @@ function App() {
                             holidays={["2026-12-25", "2026-01-01"]}
                             workHours={{ start: 9, end: 17 }}
                             onEventAdd={handleEventAdd}
-                            theme={theme}
                         />
                     </div>
                 </div>

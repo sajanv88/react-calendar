@@ -74,7 +74,10 @@ const MiniM = React.memo(function MiniM({
                         hol = cal.isHol(day),
                         has = cal.evtsForDay(day).length > 0;
                     return (
-                        <div key={i} className="rcal:relative rcal:flex rcal:items-center rcal:justify-center">
+                        <div
+                            key={i}
+                            className="rcal:relative rcal:flex rcal:items-center rcal:justify-center"
+                        >
                             <span
                                 className={`rcal:text-[9px] rcal:w-5 rcal:h-5 rcal:flex rcal:items-center rcal:justify-center rcal:rounded-full ${!inM ? "rcal:text-zinc-300 rcal:dark:text-zinc-700" : "rcal:text-zinc-600 rcal:dark:text-zinc-400"} ${td ? "rcal:bg-blue-500 rcal:text-white rcal:font-bold" : ""} ${hol && inM && !td ? "rcal:bg-rose-100 rcal:dark:bg-rose-500/15 rcal:text-rose-500" : ""} ${has && inM && !td ? "rcal:font-bold" : ""}`}
                             >

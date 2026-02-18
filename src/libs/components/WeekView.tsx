@@ -55,7 +55,10 @@ export const WeekView = React.memo(function WeekView({
                     })}
                 </div>
             </div>
-            <div className="rcal:flex-1 rcal:min-h-0 rcal:overflow-y-auto rcal:overflow-x-hidden" ref={gRef}>
+            <div
+                className="rcal:flex-1 rcal:min-h-0 rcal:overflow-y-auto rcal:overflow-x-hidden"
+                ref={gRef}
+            >
                 <div
                     className="rcal:grid rcal:relative"
                     style={{ gridTemplateColumns: "56px repeat(7,1fr)", height: 24 * HOUR_H }}

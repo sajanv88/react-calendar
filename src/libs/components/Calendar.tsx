@@ -65,16 +65,16 @@ export default function Calendar({
 
     const vOpts = cal.mob
         ? [
-            { k: "day" as CalendarView, l: "Day" },
-            { k: "month" as CalendarView, l: "Month" },
-            { k: "year" as CalendarView, l: "Year" },
-        ]
+              { k: "day" as CalendarView, l: "Day" },
+              { k: "month" as CalendarView, l: "Month" },
+              { k: "year" as CalendarView, l: "Year" },
+          ]
         : [
-            { k: "day" as CalendarView, l: "Day" },
-            { k: "week" as CalendarView, l: "Week" },
-            { k: "month" as CalendarView, l: "Month" },
-            { k: "year" as CalendarView, l: "Year" },
-        ];
+              { k: "day" as CalendarView, l: "Day" },
+              { k: "week" as CalendarView, l: "Week" },
+              { k: "month" as CalendarView, l: "Month" },
+              { k: "year" as CalendarView, l: "Year" },
+          ];
 
     return (
         <ThemeCtx.Provider value={{ theme, toggle: togTheme }}>
