@@ -28,26 +28,26 @@ export const MorePop = React.memo(function MorePop({
     return (
         <div
             ref={ref}
-            className="fixed z-50 w-64 bg-white dark:bg-zinc-900 rounded-xl shadow-2xl border border-zinc-200 dark:border-zinc-700/50 overflow-hidden"
+            className="rcal:fixed rcal:z-50 rcal:w-64 rcal:bg-white rcal:dark:bg-zinc-900 rcal:rounded-xl rcal:shadow-2xl rcal:border rcal:border-zinc-200 rcal:dark:border-zinc-700/50 rcal:overflow-hidden"
             style={{
                 animation: "fadeIn .15s ease-out",
                 top: Math.min(pos.y, window.innerHeight - 250),
                 left: Math.min(pos.x, window.innerWidth - 280),
             }}
         >
-            <div className="px-3.5 py-2.5 border-b border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
-                <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+            <div className="rcal:px-3.5 rcal:py-2.5 rcal:border-b rcal:border-zinc-100 rcal:dark:border-zinc-800 rcal:flex rcal:items-center rcal:justify-between">
+                <span className="rcal:text-xs rcal:font-semibold rcal:text-zinc-700 rcal:dark:text-zinc-300">
                     {MONTHS_SHORT[date.getMonth()]} {date.getDate()} · {events.length} events
                 </span>
                 <button
                     type="button"
                     onClick={onClose}
-                    className="p-0.5 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"
+                    className="rcal:p-0.5 rcal:text-zinc-400 rcal:hover:text-zinc-600 rcal:dark:hover:text-zinc-300"
                 >
                     <XBtn />
                 </button>
             </div>
-            <div className="p-2 space-y-1 max-h-48 overflow-y-auto">
+            <div className="rcal:p-2 rcal:space-y-1 rcal:max-h-48 rcal:overflow-y-auto">
                 {events.map((evt) => {
                     const c = gc(evt);
                     return (
@@ -58,7 +58,7 @@ export const MorePop = React.memo(function MorePop({
                                 e.stopPropagation();
                                 onEvtClick(evt, e);
                             }}
-                            className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium ${c.bg} ${c.tx} ${c.dt} hover:opacity-80 transition-opacity truncate`}
+                            className={`rcal:w-full rcal:text-left rcal:px-2.5 rcal:py-1.5 rcal:rounded-lg rcal:text-xs rcal:font-medium ${c.bg} ${c.tx} ${c.dt} rcal:hover:opacity-80 rcal:transition-opacity rcal:truncate`}
                         >
                             {evt.title}
                         </button>

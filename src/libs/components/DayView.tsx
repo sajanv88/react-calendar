@@ -27,27 +27,27 @@ export const DayView = React.memo(function DayView({
         td = isToday(cal.cur);
     const pos = layoutEvts(cal.timedForDay(cal.cur));
     return (
-        <div className="flex flex-col h-full w-full">
+        <div className="rcal:flex rcal:flex-col rcal:h-full rcal:w-full">
             <AllDayRow cal={cal} onEvtClick={onEvt} cols={1} />
-            <div className="flex-1 min-h-0 overflow-y-auto" ref={gRef}>
+            <div className="rcal:flex-1 rcal:min-h-0 rcal:overflow-y-auto" ref={gRef}>
                 <div
-                    className="grid relative"
+                    className="rcal:grid rcal:relative"
                     style={{ gridTemplateColumns: "56px 1fr", height: 24 * HOUR_H }}
                 >
-                    <div className="relative border-r border-zinc-200 dark:border-zinc-800">
+                    <div className="rcal:relative rcal:border-r rcal:border-zinc-200 rcal:dark:border-zinc-800">
                         {cal.hours.map((h) => (
                             <div
                                 key={h}
-                                className="absolute right-0 pr-2 flex items-start justify-end"
+                                className="rcal:absolute rcal:right-0 rcal:pr-2 rcal:flex rcal:items-start rcal:justify-end"
                                 style={{ top: h * HOUR_H, height: HOUR_H }}
                             >
-                                <span className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500 -mt-1.5 tabular-nums select-none">
+                                <span className="rcal:text-[11px] rcal:font-medium rcal:text-zinc-400 rcal:dark:text-zinc-500 rcal:-mt-1.5 rcal:tabular-nums rcal:select-none">
                                     {fmtTime(h)}
                                 </span>
                             </div>
                         ))}
                     </div>
-                    <div className="relative">
+                    <div className="rcal:relative">
                         {cal.hours.map((h) => {
                             const iw = cal.isWH(h);
                             return (
@@ -55,17 +55,17 @@ export const DayView = React.memo(function DayView({
                                     key={h}
                                     onPointerDown={gh.dn}
                                     onPointerUp={(e) => gh.up(cal.cur, h, e)}
-                                    className={`absolute left-0 right-0 border-b border-zinc-100 dark:border-zinc-800/30 cursor-pointer transition-colors ${iw ? "bg-blue-50/30 dark:bg-blue-500/[0.02]" : ""} ${hol ? "bg-rose-50/30 dark:bg-rose-500/[0.02]" : ""} hover:bg-blue-100/40 dark:hover:bg-blue-500/[0.06]`}
+                                    className={`rcal:absolute rcal:left-0 rcal:right-0 rcal:border-b rcal:border-zinc-100 rcal:dark:border-zinc-800/30 rcal:cursor-pointer rcal:transition-colors ${iw ? "rcal:bg-blue-50/30 rcal:dark:bg-blue-500/[0.02]" : ""} ${hol ? "rcal:bg-rose-50/30 rcal:dark:bg-rose-500/[0.02]" : ""} rcal:hover:bg-blue-100/40 rcal:dark:hover:bg-blue-500/[0.06]`}
                                     style={{ top: h * HOUR_H, height: HOUR_H }}
                                 />
                             );
                         })}
                         <div
-                            className="absolute left-0 right-0 border-t-2 border-blue-200/60 dark:border-blue-700/30 pointer-events-none z-10"
+                            className="rcal:absolute rcal:left-0 rcal:right-0 rcal:border-t-2 rcal:border-blue-200/60 rcal:dark:border-blue-700/30 rcal:pointer-events-none rcal:z-10"
                             style={{ top: cal.workHours.start * HOUR_H }}
                         />
                         <div
-                            className="absolute left-0 right-0 border-b-2 border-blue-200/60 dark:border-blue-700/30 pointer-events-none z-10"
+                            className="rcal:absolute rcal:left-0 rcal:right-0 rcal:border-b-2 rcal:border-blue-200/60 rcal:dark:border-blue-700/30 rcal:pointer-events-none rcal:z-10"
                             style={{ top: cal.workHours.end * HOUR_H }}
                         />
                         {pos.map(({ evt, top, height, left, width }) => {
@@ -80,7 +80,7 @@ export const DayView = React.memo(function DayView({
                                         e.stopPropagation();
                                         onEvt(evt, e);
                                     }}
-                                    className={`absolute rounded-lg overflow-hidden border-l-[3px] z-20 cursor-pointer transition-all hover:brightness-95 hover:shadow-md active:scale-[0.98] ${c.bg} ${c.bd}`}
+                                    className={`rcal:absolute rcal:rounded-lg rcal:overflow-hidden rcal:border-l-[3px] rcal:z-20 rcal:cursor-pointer rcal:transition-all rcal:hover:brightness-95 rcal:hover:shadow-md rcal:active:scale-[0.98] ${c.bg} ${c.bd}`}
                                     style={{
                                         top,
                                         height: Math.max(height, 24),
@@ -89,20 +89,20 @@ export const DayView = React.memo(function DayView({
                                         borderLeftColor: evt.color || c.hex,
                                     }}
                                 >
-                                    <div className="px-3 py-1.5 h-full overflow-hidden">
+                                    <div className="rcal:px-3 rcal:py-1.5 rcal:h-full rcal:overflow-hidden">
                                         <div
-                                            className={`text-xs font-semibold leading-tight ${c.tx} ${c.dt}`}
+                                            className={`rcal:text-xs rcal:font-semibold rcal:leading-tight ${c.tx} ${c.dt}`}
                                         >
                                             {evt.title}
                                         </div>
                                         {height > 36 && (
-                                            <div className="text-[10px] opacity-60 mt-0.5">
+                                            <div className="rcal:text-[10px] rcal:opacity-60 rcal:mt-0.5">
                                                 {fmtTime(es.getHours(), es.getMinutes())} –{" "}
                                                 {fmtTime(ee.getHours(), ee.getMinutes())}
                                             </div>
                                         )}
                                         {height > 56 && evt.location && (
-                                            <div className="text-[10px] opacity-50 mt-0.5 flex items-center gap-1">
+                                            <div className="rcal:text-[10px] rcal:opacity-50 rcal:mt-0.5 rcal:flex rcal:items-center rcal:gap-1">
                                                 <PinI />
                                                 {evt.location}
                                             </div>

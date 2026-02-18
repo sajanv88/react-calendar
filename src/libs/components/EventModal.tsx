@@ -94,29 +94,29 @@ export const EventModal = React.memo(function EventModal({
     if (!isOpen) return null;
     return (
         <div
-            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center"
+            className="rcal:fixed rcal:inset-0 rcal:z-50 rcal:flex rcal:items-end rcal:sm:items-center rcal:justify-center"
             onClick={(e) => {
                 if (e.target === e.currentTarget) onClose();
             }}
         >
-            <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+            <div className="rcal:absolute rcal:inset-0 rcal:bg-black/40 rcal:backdrop-blur-sm" />
             <div
-                className="relative w-full sm:max-w-lg bg-white dark:bg-zinc-900 rounded-t-2xl sm:rounded-2xl shadow-2xl max-h-[92vh] overflow-y-auto"
+                className="rcal:relative rcal:w-full rcal:sm:max-w-lg rcal:bg-white rcal:dark:bg-zinc-900 rcal:rounded-t-2xl rcal:sm:rounded-2xl rcal:shadow-2xl rcal:max-h-[92vh] rcal:overflow-y-auto"
                 style={{ animation: "slideUp .25s cubic-bezier(.16,1,.3,1)" }}
             >
-                <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-200 dark:border-zinc-700/60">
-                    <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+                <div className="rcal:flex rcal:items-center rcal:justify-between rcal:px-5 rcal:py-4 rcal:border-b rcal:border-zinc-200 rcal:dark:border-zinc-700/60">
+                    <h2 className="rcal:text-lg rcal:font-semibold rcal:text-zinc-900 rcal:dark:text-zinc-100">
                         {existing ? "Edit Event" : "New Event"}
                     </h2>
                     <button
                         type="button"
                         onClick={onClose}
-                        className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
+                        className="rcal:p-1.5 rcal:rounded-lg rcal:hover:bg-zinc-100 rcal:dark:hover:bg-zinc-800 rcal:text-zinc-400 rcal:hover:text-zinc-600 rcal:dark:hover:text-zinc-300 rcal:transition-colors"
                     >
                         <XBtn />
                     </button>
                 </div>
-                <div className="px-5 py-4 space-y-4">
+                <div className="rcal:px-5 rcal:py-4 rcal:space-y-4">
                     <Fld label="Title">
                         <input
                             type="text"
@@ -127,7 +127,7 @@ export const EventModal = React.memo(function EventModal({
                         />
                     </Fld>
                     <Fld label="Category">
-                        <div className="grid grid-cols-4 gap-2">
+                        <div className="rcal:grid rcal:grid-cols-4 rcal:gap-2">
                             {(["work", "personal", "holiday", "urgent"] as EventCategory[]).map(
                                 (c2) => {
                                     const cc = CAT_STYLES[c2];
@@ -136,7 +136,7 @@ export const EventModal = React.memo(function EventModal({
                                             type="button"
                                             key={c2}
                                             onClick={() => sC(c2)}
-                                            className={`px-3 py-2 rounded-xl text-xs font-medium capitalize transition-all border-2 ${cat === c2 ? `${cc.bg} ${cc.bd} ${cc.tx} ${cc.dt}` : "border-transparent bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700"}`}
+                                            className={`rcal:px-3 rcal:py-2 rcal:rounded-xl rcal:text-xs rcal:font-medium rcal:capitalize rcal:transition-all rcal:border-2 ${cat === c2 ? `${cc.bg} ${cc.bd} ${cc.tx} ${cc.dt}` : "rcal:border-transparent rcal:bg-zinc-100 rcal:dark:bg-zinc-800 rcal:text-zinc-500 rcal:dark:text-zinc-400 rcal:hover:bg-zinc-200 rcal:dark:hover:bg-zinc-700"}`}
                                         >
                                             {c2}
                                         </button>
@@ -153,21 +153,21 @@ export const EventModal = React.memo(function EventModal({
                             className={iCls}
                         />
                     </Fld>
-                    <label className="flex items-center gap-3 cursor-pointer select-none">
+                    <label className="rcal:flex rcal:items-center rcal:gap-3 rcal:cursor-pointer rcal:select-none">
                         <div
-                            className={`relative w-10 h-6 rounded-full transition-colors ${ad ? "bg-blue-500" : "bg-zinc-300 dark:bg-zinc-600"}`}
+                            className={`rcal:relative rcal:w-10 rcal:h-6 rcal:rounded-full rcal:transition-colors ${ad ? "rcal:bg-blue-500" : "rcal:bg-zinc-300 rcal:dark:bg-zinc-600"}`}
                             onClick={() => sAd(!ad)}
                         >
                             <div
-                                className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow-md transition-transform ${ad ? "translate-x-[18px]" : "translate-x-0.5"}`}
+                                className={`rcal:absolute rcal:top-0.5 rcal:w-5 rcal:h-5 rcal:bg-white rcal:rounded-full rcal:shadow-md rcal:transition-transform ${ad ? "rcal:translate-x-[18px]" : "rcal:translate-x-0.5"}`}
                             />
                         </div>
-                        <span className="text-sm text-zinc-600 dark:text-zinc-300">
+                        <span className="rcal:text-sm rcal:text-zinc-600 rcal:dark:text-zinc-300">
                             All day event
                         </span>
                     </label>
                     {!ad && (
-                        <div className="grid grid-cols-2 gap-3">
+                        <div className="rcal:grid rcal:grid-cols-2 rcal:gap-3">
                             <Fld label="Start">
                                 <input
                                     type="time"
@@ -205,11 +205,11 @@ export const EventModal = React.memo(function EventModal({
                         />
                     </Fld>
                 </div>
-                <div className="flex gap-3 px-5 py-4 border-t border-zinc-200 dark:border-zinc-700/60">
+                <div className="rcal:flex rcal:gap-3 rcal:px-5 rcal:py-4 rcal:border-t rcal:border-zinc-200 rcal:dark:border-zinc-700/60">
                     <button
                         type="button"
                         onClick={onClose}
-                        className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-zinc-600 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+                        className="rcal:flex-1 rcal:px-4 rcal:py-2.5 rcal:rounded-xl rcal:text-sm rcal:font-medium rcal:text-zinc-600 rcal:dark:text-zinc-300 rcal:bg-zinc-100 rcal:dark:bg-zinc-800 rcal:hover:bg-zinc-200 rcal:dark:hover:bg-zinc-700 rcal:transition-colors"
                     >
                         Cancel
                     </button>
@@ -217,7 +217,7 @@ export const EventModal = React.memo(function EventModal({
                         type="button"
                         onClick={submit}
                         disabled={!t.trim()}
-                        className="flex-1 px-4 py-2.5 rounded-xl text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shadow-lg shadow-blue-500/25"
+                        className="rcal:flex-1 rcal:px-4 rcal:py-2.5 rcal:rounded-xl rcal:text-sm rcal:font-medium rcal:text-white rcal:bg-blue-500 rcal:hover:bg-blue-600 rcal:disabled:opacity-40 rcal:disabled:cursor-not-allowed rcal:transition-colors rcal:shadow-lg rcal:shadow-blue-500/25"
                     >
                         {existing ? "Update" : "Create Event"}
                     </button>

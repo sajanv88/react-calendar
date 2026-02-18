@@ -24,29 +24,29 @@ export const WeekView = React.memo(function WeekView({
     }, [cal.workHours.start]);
 
     return (
-        <div className="flex flex-col h-full w-full">
+        <div className="rcal:flex rcal:flex-col rcal:h-full rcal:w-full">
             <AllDayRow cal={cal} onEvtClick={onEvt} cols={7} />
-            <div className="sticky top-0 z-20 bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 shadow-sm shadow-black/[0.03] dark:shadow-black/20 flex-shrink-0">
-                <div className="grid" style={{ gridTemplateColumns: "56px repeat(7,1fr)" }}>
-                    <div className="py-2 border-r border-zinc-100 dark:border-zinc-800" />
+            <div className="rcal:sticky rcal:top-0 rcal:z-20 rcal:bg-white rcal:dark:bg-zinc-950 rcal:border-b rcal:border-zinc-200 rcal:dark:border-zinc-800 rcal:shadow-sm rcal:shadow-black/[0.03] rcal:dark:shadow-black/20 rcal:flex-shrink-0">
+                <div className="rcal:grid" style={{ gridTemplateColumns: "56px repeat(7,1fr)" }}>
+                    <div className="rcal:py-2 rcal:border-r rcal:border-zinc-100 rcal:dark:border-zinc-800" />
                     {cal.weekDays.map((day) => {
                         const td = isToday(day),
                             hol = cal.isHol(day);
                         return (
                             <div
                                 key={day.toISOString()}
-                                className={`py-2 text-center border-r border-zinc-100 dark:border-zinc-800/50 last:border-r-0 transition-colors ${td ? "bg-blue-50/50 dark:bg-blue-500/[0.04]" : ""}`}
+                                className={`rcal:py-2 rcal:text-center rcal:border-r rcal:border-zinc-100 rcal:dark:border-zinc-800/50 rcal:last:border-r-0 rcal:transition-colors ${td ? "rcal:bg-blue-50/50 rcal:dark:bg-blue-500/[0.04]" : ""}`}
                             >
-                                <div className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+                                <div className="rcal:text-[10px] rcal:font-semibold rcal:uppercase rcal:tracking-wider rcal:text-zinc-400 rcal:dark:text-zinc-500">
                                     {DAYS[day.getDay()]}
                                 </div>
                                 <div
-                                    className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold mt-0.5 transition-all ${td ? "bg-blue-500 text-white shadow-lg shadow-blue-500/30" : "text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800"} ${hol && !td ? "ring-2 ring-rose-400 dark:ring-rose-500" : ""}`}
+                                    className={`rcal:inline-flex rcal:items-center rcal:justify-center rcal:w-8 rcal:h-8 rcal:rounded-full rcal:text-sm rcal:font-bold rcal:mt-0.5 rcal:transition-all ${td ? "rcal:bg-blue-500 rcal:text-white rcal:shadow-lg rcal:shadow-blue-500/30" : "rcal:text-zinc-800 rcal:dark:text-zinc-200 rcal:hover:bg-zinc-100 rcal:dark:hover:bg-zinc-800"} ${hol && !td ? "rcal:ring-2 rcal:ring-rose-400 rcal:dark:ring-rose-500" : ""}`}
                                 >
                                     {day.getDate()}
                                 </div>
                                 {hol && (
-                                    <div className="text-[9px] text-rose-500 dark:text-rose-400 font-semibold mt-0.5">
+                                    <div className="rcal:text-[9px] rcal:text-rose-500 rcal:dark:text-rose-400 rcal:font-semibold rcal:mt-0.5">
                                         Holiday
                                     </div>
                                 )}
@@ -55,19 +55,19 @@ export const WeekView = React.memo(function WeekView({
                     })}
                 </div>
             </div>
-            <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden" ref={gRef}>
+            <div className="rcal:flex-1 rcal:min-h-0 rcal:overflow-y-auto rcal:overflow-x-hidden" ref={gRef}>
                 <div
-                    className="grid relative"
+                    className="rcal:grid rcal:relative"
                     style={{ gridTemplateColumns: "56px repeat(7,1fr)", height: 24 * HOUR_H }}
                 >
-                    <div className="relative border-r border-zinc-200 dark:border-zinc-800">
+                    <div className="rcal:relative rcal:border-r rcal:border-zinc-200 rcal:dark:border-zinc-800">
                         {cal.hours.map((h) => (
                             <div
                                 key={h}
-                                className="absolute right-0 pr-2 flex items-start justify-end"
+                                className="rcal:absolute rcal:right-0 rcal:pr-2 rcal:flex rcal:items-start rcal:justify-end"
                                 style={{ top: h * HOUR_H, height: HOUR_H }}
                             >
-                                <span className="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 -mt-1.5 tabular-nums select-none">
+                                <span className="rcal:text-[10px] rcal:font-medium rcal:text-zinc-400 rcal:dark:text-zinc-500 rcal:-mt-1.5 rcal:tabular-nums rcal:select-none">
                                     {fmtH24(h)}
                                 </span>
                             </div>
@@ -80,7 +80,7 @@ export const WeekView = React.memo(function WeekView({
                         return (
                             <div
                                 key={day.toISOString()}
-                                className="relative border-r border-zinc-100 dark:border-zinc-800/40 last:border-r-0"
+                                className="rcal:relative rcal:border-r rcal:border-zinc-100 rcal:dark:border-zinc-800/40 rcal:last:border-r-0"
                             >
                                 {cal.hours.map((h) => {
                                     const iw = cal.isWH(h);
@@ -89,17 +89,17 @@ export const WeekView = React.memo(function WeekView({
                                             key={h}
                                             onPointerDown={gh.dn}
                                             onPointerUp={(e) => gh.up(day, h, e)}
-                                            className={`absolute left-0 right-0 border-b border-zinc-100 dark:border-zinc-800/30 cursor-pointer transition-colors ${iw ? "bg-blue-50/30 dark:bg-blue-500/[0.02]" : "bg-transparent"} ${hol ? "bg-rose-50/30 dark:bg-rose-500/[0.02]" : ""} ${td && !iw && !hol ? "bg-blue-50/20 dark:bg-blue-500/[0.01]" : ""} hover:bg-blue-100/50 dark:hover:bg-blue-500/[0.08]`}
+                                            className={`rcal:absolute rcal:left-0 rcal:right-0 rcal:border-b rcal:border-zinc-100 rcal:dark:border-zinc-800/30 rcal:cursor-pointer rcal:transition-colors ${iw ? "rcal:bg-blue-50/30 rcal:dark:bg-blue-500/[0.02]" : "rcal:bg-transparent"} ${hol ? "rcal:bg-rose-50/30 rcal:dark:bg-rose-500/[0.02]" : ""} ${td && !iw && !hol ? "rcal:bg-blue-50/20 rcal:dark:bg-blue-500/[0.01]" : ""} rcal:hover:bg-blue-100/50 rcal:dark:hover:bg-blue-500/[0.08]`}
                                             style={{ top: h * HOUR_H, height: HOUR_H }}
                                         />
                                     );
                                 })}
                                 <div
-                                    className="absolute left-0 right-0 border-t-2 border-blue-200/60 dark:border-blue-700/30 pointer-events-none z-10"
+                                    className="rcal:absolute rcal:left-0 rcal:right-0 rcal:border-t-2 rcal:border-blue-200/60 rcal:dark:border-blue-700/30 rcal:pointer-events-none rcal:z-10"
                                     style={{ top: cal.workHours.start * HOUR_H }}
                                 />
                                 <div
-                                    className="absolute left-0 right-0 border-b-2 border-blue-200/60 dark:border-blue-700/30 pointer-events-none z-10"
+                                    className="rcal:absolute rcal:left-0 rcal:right-0 rcal:border-b-2 rcal:border-blue-200/60 rcal:dark:border-blue-700/30 rcal:pointer-events-none rcal:z-10"
                                     style={{ top: cal.workHours.end * HOUR_H }}
                                 />
                                 {pos.map(({ evt, top, height, left, width }) => {
@@ -112,7 +112,7 @@ export const WeekView = React.memo(function WeekView({
                                                 e.stopPropagation();
                                                 onEvt(evt, e);
                                             }}
-                                            className={`absolute rounded-lg overflow-hidden border-l-[3px] z-20 cursor-pointer transition-all hover:brightness-95 hover:shadow-md active:scale-[0.98] ${c.bg} ${c.bd}`}
+                                            className={`rcal:absolute rcal:rounded-lg rcal:overflow-hidden rcal:border-l-[3px] rcal:z-20 rcal:cursor-pointer rcal:transition-all rcal:hover:brightness-95 rcal:hover:shadow-md rcal:active:scale-[0.98] ${c.bg} ${c.bd}`}
                                             style={{
                                                 top,
                                                 height: Math.max(height, 20),
@@ -122,14 +122,14 @@ export const WeekView = React.memo(function WeekView({
                                             }}
                                             title={evt.title}
                                         >
-                                            <div className="px-2 py-1 h-full overflow-hidden">
+                                            <div className="rcal:px-2 rcal:py-1 rcal:h-full rcal:overflow-hidden">
                                                 <div
-                                                    className={`text-[11px] font-semibold leading-tight truncate ${c.tx} ${c.dt}`}
+                                                    className={`rcal:text-[11px] rcal:font-semibold rcal:leading-tight rcal:truncate ${c.tx} ${c.dt}`}
                                                 >
                                                     {evt.title}
                                                 </div>
                                                 {height > 36 && (
-                                                    <div className="text-[10px] opacity-60 mt-0.5 text-zinc-600 dark:text-zinc-400">
+                                                    <div className="rcal:text-[10px] rcal:opacity-60 rcal:mt-0.5 rcal:text-zinc-600 rcal:dark:text-zinc-400">
                                                         {fmtTime(
                                                             parseISO(evt.start).getHours(),
                                                             parseISO(evt.start).getMinutes()

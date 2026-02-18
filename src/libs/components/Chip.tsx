@@ -20,7 +20,7 @@ export const Chip = React.memo(function Chip({
                 onClick(event, e);
             }}
             title={event.title}
-            className={`w-full text-left rounded-md px-1.5 py-0.5 text-[11px] leading-tight font-medium truncate border-l-2 transition-all hover:brightness-95 active:scale-[0.98] ${c.bg} ${c.bd} ${c.tx} ${c.dt}`}
+            className={`rcal:w-full rcal:text-left rcal:rounded-md rcal:px-1.5 rcal:py-0.5 rcal:text-[11px] rcal:leading-tight rcal:font-medium rcal:truncate rcal:border-l-2 rcal:transition-all rcal:hover:brightness-95 rcal:active:scale-[0.98] ${c.bg} ${c.bd} ${c.tx} ${c.dt}`}
         >
             {compact ? event.title.slice(0, 14) : event.title}
         </button>
