@@ -37,7 +37,8 @@
         "noUnusedVariables": "error",
         "noUnusedImports": "error",
         "useExhaustiveDependencies": "warn",
-        "useHookAtTopLevel": "error"
+        "useHookAtTopLevel": "error",
+        "noUnknownMediaFeatureName": "warn"
       },
       "performance": {
         "recommended": true
@@ -80,6 +81,11 @@
       "indentStyle": "space",
       "indentWidth": 4,
       "lineWidth": 100
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
     }
   },
   "overrides": [

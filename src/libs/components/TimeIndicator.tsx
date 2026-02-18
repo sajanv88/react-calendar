@@ -11,10 +11,13 @@ export function TimeNow(): React.ReactElement {
     }, []);
     const top = (minsOfDay(now) / 60) * HOUR_H;
     return (
-        <div className="absolute left-0 right-0 z-30 pointer-events-none" style={{ top }}>
-            <div className="relative flex items-center">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-500 -ml-1 flex-shrink-0 shadow-sm shadow-red-500/40" />
-                <div className="flex-1 h-[2px] bg-red-500 shadow-sm shadow-red-500/30" />
+        <div
+            className="rcal:absolute rcal:left-0 rcal:right-0 rcal:z-30 rcal:pointer-events-none"
+            style={{ top }}
+        >
+            <div className="rcal:relative rcal:flex rcal:items-center">
+                <div className="rcal:w-2.5 rcal:h-2.5 rcal:rounded-full rcal:bg-red-500 rcal:-ml-1 rcal:flex-shrink-0 rcal:shadow-sm rcal:shadow-red-500/40" />
+                <div className="rcal:flex-1 rcal:h-[2px] rcal:bg-red-500 rcal:shadow-sm rcal:shadow-red-500/30" />
             </div>
         </div>
     );

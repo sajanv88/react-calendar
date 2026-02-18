@@ -78,9 +78,9 @@ export default function Calendar({
 
     return (
         <ThemeCtx.Provider value={{ theme, toggle: togTheme }}>
-            <div className={`h-full w-full ${theme === "dark" ? "dark" : ""}`}>
+            <div className={`rcal:h-full rcal:w-full ${theme === "dark" ? "dark" : ""}`}>
                 <div
-                    className="flex flex-col h-full w-full bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100"
+                    className="rcal:flex rcal:flex-col rcal:h-full rcal:w-full rcal:bg-white rcal:dark:bg-zinc-950 rcal:text-zinc-900 rcal:dark:text-zinc-100"
                     style={{ fontFamily: "'DM Sans','Segoe UI',system-ui,sans-serif" }}
                 >
                     <style>{`
@@ -90,49 +90,49 @@ export default function Calendar({
             *{scrollbar-width:thin;scrollbar-color:#a1a1aa20 transparent}.dark *{scrollbar-color:#52525b40 transparent}
           `}</style>
 
-                    <header className="flex-shrink-0 border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950">
-                        <div className="flex items-center justify-between px-3 sm:px-5 py-3 gap-2">
-                            <div className="flex items-center gap-2.5 min-w-0">
-                                <div className="hidden sm:flex items-center justify-center w-9 h-9 rounded-xl bg-blue-500 text-white shadow-lg shadow-blue-500/25 flex-shrink-0">
+                    <header className="rcal:flex-shrink-0 rcal:border-b rcal:border-zinc-200 rcal:dark:border-zinc-800 rcal:bg-white rcal:dark:bg-zinc-950">
+                        <div className="rcal:flex rcal:items-center rcal:justify-between rcal:px-3 rcal:sm:px-5 rcal:py-3 rcal:gap-2">
+                            <div className="rcal:flex rcal:items-center rcal:gap-2.5 rcal:min-w-0">
+                                <div className="rcal:hidden rcal:sm:flex rcal:items-center rcal:justify-center rcal:w-9 rcal:h-9 rcal:rounded-xl rcal:bg-blue-500 rcal:text-white rcal:shadow-lg rcal:shadow-blue-500/25 rcal:flex-shrink-0">
                                     <CalI />
                                 </div>
-                                <div className="min-w-0">
-                                    <h1 className="text-sm sm:text-lg font-bold truncate tracking-tight">
+                                <div className="rcal:min-w-0">
+                                    <h1 className="rcal:text-sm rcal:sm:text-lg rcal:font-bold rcal:truncate rcal:tracking-tight">
                                         {cal.title}
                                     </h1>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-1">
+                            <div className="rcal:flex rcal:items-center rcal:gap-1">
                                 <button
                                     type="button"
                                     onClick={cal.goPrev}
-                                    className="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 transition-colors active:scale-95"
+                                    className="rcal:p-2 rcal:rounded-lg rcal:hover:bg-zinc-100 rcal:dark:hover:bg-zinc-800 rcal:text-zinc-500 rcal:hover:text-zinc-700 rcal:dark:text-zinc-400 rcal:dark:hover:text-zinc-200 rcal:transition-colors rcal:active:scale-95"
                                 >
                                     <ChevL />
                                 </button>
                                 <button
                                     type="button"
                                     onClick={cal.goToday}
-                                    className="px-3 py-1.5 rounded-lg text-xs font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 hover:bg-blue-100 dark:hover:bg-blue-500/20 transition-colors active:scale-95"
+                                    className="rcal:px-3 rcal:py-1.5 rcal:rounded-lg rcal:text-xs rcal:font-semibold rcal:text-blue-600 rcal:dark:text-blue-400 rcal:bg-blue-50 rcal:dark:bg-blue-500/10 rcal:hover:bg-blue-100 rcal:dark:hover:bg-blue-500/20 rcal:transition-colors rcal:active:scale-95"
                                 >
                                     Today
                                 </button>
                                 <button
                                     type="button"
                                     onClick={cal.goNext}
-                                    className="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200 transition-colors active:scale-95"
+                                    className="rcal:p-2 rcal:rounded-lg rcal:hover:bg-zinc-100 rcal:dark:hover:bg-zinc-800 rcal:text-zinc-500 rcal:hover:text-zinc-700 rcal:dark:text-zinc-400 rcal:dark:hover:text-zinc-200 rcal:transition-colors rcal:active:scale-95"
                                 >
                                     <ChevR />
                                 </button>
                             </div>
-                            <div className="flex items-center gap-1.5">
-                                <div className="hidden sm:flex items-center bg-zinc-100 dark:bg-zinc-800/80 rounded-lg p-0.5">
+                            <div className="rcal:flex rcal:items-center rcal:gap-1.5">
+                                <div className="rcal:hidden rcal:sm:flex rcal:items-center rcal:bg-zinc-100 rcal:dark:bg-zinc-800/80 rcal:rounded-lg rcal:p-0.5">
                                     {vOpts.map((v) => (
                                         <button
                                             type="button"
                                             key={v.k}
                                             onClick={() => cal.setView(v.k)}
-                                            className={`px-2.5 py-1.5 rounded-md text-[11px] font-semibold transition-all ${cal.view === v.k ? "bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300"}`}
+                                            className={`rcal:px-2.5 rcal:py-1.5 rcal:rounded-md rcal:text-[11px] rcal:font-semibold rcal:transition-all ${cal.view === v.k ? "rcal:bg-white rcal:dark:bg-zinc-700 rcal:text-zinc-900 rcal:dark:text-zinc-100 rcal:shadow-sm" : "rcal:text-zinc-500 rcal:dark:text-zinc-400 rcal:hover:text-zinc-700 rcal:dark:hover:text-zinc-300"}`}
                                         >
                                             {v.l}
                                         </button>
@@ -142,7 +142,7 @@ export default function Calendar({
                                     <button
                                         type="button"
                                         onClick={togTheme}
-                                        className="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
+                                        className="rcal:p-2 rcal:rounded-lg rcal:hover:bg-zinc-100 rcal:dark:hover:bg-zinc-800 rcal:text-zinc-400 rcal:hover:text-zinc-600 rcal:dark:hover:text-zinc-300 rcal:transition-colors"
                                         title={theme === "light" ? "Dark mode" : "Light mode"}
                                     >
                                         {theme === "light" ? <MoonI /> : <SunI />}
@@ -151,20 +151,20 @@ export default function Calendar({
                                 <button
                                     type="button"
                                     onClick={() => onCell(cal.cur)}
-                                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-white bg-blue-500 hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/25 active:scale-95"
+                                    className="rcal:flex rcal:items-center rcal:gap-1.5 rcal:px-3 rcal:py-2 rcal:rounded-lg rcal:text-xs rcal:font-semibold rcal:text-white rcal:bg-blue-500 rcal:hover:bg-blue-600 rcal:transition-colors rcal:shadow-lg rcal:shadow-blue-500/25 rcal:active:scale-95"
                                 >
                                     <PlusI />
-                                    <span className="hidden sm:inline">Event</span>
+                                    <span className="rcal:hidden rcal:sm:inline">Event</span>
                                 </button>
                             </div>
                         </div>
-                        <div className="sm:hidden flex items-center gap-1 px-3 pb-2">
+                        <div className="rcal:sm:hidden rcal:flex rcal:items-center rcal:gap-1 rcal:px-3 rcal:pb-2">
                             {vOpts.map((v) => (
                                 <button
                                     type="button"
                                     key={v.k}
                                     onClick={() => cal.setView(v.k)}
-                                    className={`flex-1 py-1.5 rounded-lg text-[11px] font-semibold transition-all ${cal.view === v.k ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100" : "text-zinc-400 dark:text-zinc-500"}`}
+                                    className={`rcal:flex-1 rcal:py-1.5 rcal:rounded-lg rcal:text-[11px] rcal:font-semibold rcal:transition-all ${cal.view === v.k ? "rcal:bg-zinc-100 rcal:dark:bg-zinc-800 rcal:text-zinc-900 rcal:dark:text-zinc-100" : "rcal:text-zinc-400 rcal:dark:text-zinc-500"}`}
                                 >
                                     {v.l}
                                 </button>
@@ -172,7 +172,7 @@ export default function Calendar({
                         </div>
                     </header>
 
-                    <main className="flex-1 min-h-0">
+                    <main className="rcal:flex-1 rcal:min-h-0">
                         {cal.view === "month" && (
                             <MonthView cal={cal} onCell={(d) => onCell(d)} onEvt={onEvt} />
                         )}
@@ -183,28 +183,28 @@ export default function Calendar({
                         {cal.view === "year" && <YearView cal={cal} />}
                     </main>
 
-                    <footer className="flex-shrink-0 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 px-4 py-2">
-                        <div className="flex items-center justify-between text-[10px] text-zinc-400 dark:text-zinc-500">
-                            <div className="flex items-center gap-3 flex-wrap">
-                                <span className="flex items-center gap-1">
-                                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                    <footer className="rcal:flex-shrink-0 rcal:border-t rcal:border-zinc-200 rcal:dark:border-zinc-800 rcal:bg-zinc-50/50 rcal:dark:bg-zinc-900/50 rcal:px-4 rcal:py-2">
+                        <div className="rcal:flex rcal:items-center rcal:justify-between rcal:text-[10px] rcal:text-zinc-400 rcal:dark:text-zinc-500">
+                            <div className="rcal:flex rcal:items-center rcal:gap-3 rcal:flex-wrap">
+                                <span className="rcal:flex rcal:items-center rcal:gap-1">
+                                    <span className="rcal:w-2 rcal:h-2 rcal:rounded-full rcal:bg-emerald-500" />
                                     Work
                                 </span>
-                                <span className="flex items-center gap-1">
-                                    <span className="w-2 h-2 rounded-full bg-indigo-500" />
+                                <span className="rcal:flex rcal:items-center rcal:gap-1">
+                                    <span className="rcal:w-2 rcal:h-2 rcal:rounded-full rcal:bg-indigo-500" />
                                     Personal
                                 </span>
-                                <span className="flex items-center gap-1">
-                                    <span className="w-2 h-2 rounded-full bg-rose-500" />
+                                <span className="rcal:flex rcal:items-center rcal:gap-1">
+                                    <span className="rcal:w-2 rcal:h-2 rcal:rounded-full rcal:bg-rose-500" />
                                     Holiday
                                 </span>
-                                <span className="flex items-center gap-1">
-                                    <span className="w-2 h-2 rounded-full bg-amber-500" />
+                                <span className="rcal:flex rcal:items-center rcal:gap-1">
+                                    <span className="rcal:w-2 rcal:h-2 rcal:rounded-full rcal:bg-amber-500" />
                                     Urgent
                                 </span>
                             </div>
-                            <div className="hidden sm:flex items-center gap-2 font-medium">
-                                <span className="w-3 h-2 rounded-sm bg-blue-100 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-800" />
+                            <div className="rcal:hidden rcal:sm:flex rcal:items-center rcal:gap-2 rcal:font-medium">
+                                <span className="rcal:w-3 rcal:h-2 rcal:rounded-sm rcal:bg-blue-100 rcal:dark:bg-blue-500/10 rcal:border rcal:border-blue-200 rcal:dark:border-blue-800" />
                                 Work: {fmtTime(workHours.start)} – {fmtTime(workHours.end)}
                             </div>
                         </div>

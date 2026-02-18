@@ -72,7 +72,6 @@ const sampleEvents: CalendarEvent[] = [
 function App() {
     const [events, setEvents] = useState<CalendarEvent[]>(sampleEvents);
 
-    const [theme, setTheme] = useState<"light" | "dark">("light");
 
     const handleEventAdd = (event: CalendarEvent) => {
         console.log("New event added:", event);
@@ -80,28 +79,27 @@ function App() {
     };
 
     return (
-        <div className="h-screen bg-zinc-50 dark:bg-zinc-900">
-            <div className="container mx-auto p-4 max-w-7xl">
-                <div className="mb-6 flex items-center justify-between">
+        <div className="rcal:h-screen rcal:bg-zinc-50 rcal:dark:bg-zinc-900">
+            <div className="rcal:container rcal:mx-auto rcal:p-4 rcal:max-w-7xl">
+                <div className="rcal:mb-6 rcal:flex rcal:items-center rcal:justify-between">
                     <div>
-                        <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
+                        <h1 className="rcal:text-3xl rcal:font-bold rcal:text-zinc-900 rcal:dark:text-zinc-100 rcal:mb-2">
                             React Calendar Example
                         </h1>
-                        <p className="text-zinc-600 dark:text-zinc-400">
+                        <p className="rcal:text-zinc-600 rcal:dark:text-zinc-400">
                             A simple and reusable calendar component for React with event management
                         </p>
                     </div>
 
                 </div>
 
-                <div className="h-full bg-white dark:bg-zinc-800 rounded-xl shadow-lg border border-zinc-200 dark:border-zinc-700">
-                    <div className="h-[600px]">
+                <div className="rcal:h-full rcal:bg-white rcal:dark:bg-zinc-800 rcal:rounded-xl rcal:shadow-lg rcal:border rcal:border-zinc-200 rcal:dark:border-zinc-700">
+                    <div className="rcal:h-[600px]">
                         <Calendar
                             initialEvents={events}
                             holidays={["2026-12-25", "2026-01-01"]}
                             workHours={{ start: 9, end: 17 }}
                             onEventAdd={handleEventAdd}
-                            theme={theme}
                         />
                     </div>
                 </div>
