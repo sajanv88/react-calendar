@@ -1,5 +1,5 @@
 import type React from "react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { DEFAULT_HOLIDAYS, DEFAULT_WORK_HOURS, SAMPLE_EVENTS } from "../constants";
 import { ThemeCtx } from "../context/ThemeContext";
 import { useCalendar } from "../hooks/useCalendar";
@@ -65,29 +65,20 @@ export default function Calendar({
 
     const vOpts = cal.mob
         ? [
-            { k: "day" as CalendarView, l: "Day" },
-            { k: "month" as CalendarView, l: "Month" },
-            { k: "year" as CalendarView, l: "Year" },
-        ]
+              { k: "day" as CalendarView, l: "Day" },
+              { k: "month" as CalendarView, l: "Month" },
+              { k: "year" as CalendarView, l: "Year" },
+          ]
         : [
-            { k: "day" as CalendarView, l: "Day" },
-            { k: "week" as CalendarView, l: "Week" },
-            { k: "month" as CalendarView, l: "Month" },
-            { k: "year" as CalendarView, l: "Year" },
-        ];
-
-    useEffect(() => {
-        document.documentElement.classList.remove("light", "dark");
-        document.documentElement.classList.add(initialTheme);
-        setTheme(() => initialTheme);
-
-    }, [initialTheme])
-
-    console.log("Theme: ", theme);
+              { k: "day" as CalendarView, l: "Day" },
+              { k: "week" as CalendarView, l: "Week" },
+              { k: "month" as CalendarView, l: "Month" },
+              { k: "year" as CalendarView, l: "Year" },
+          ];
 
     return (
         <ThemeCtx.Provider value={{ theme, toggle: togTheme }}>
-            <div className={`h-full w-full ${theme === "dark" ? "dark" : "light"}`}>
+            <div className={`h-full w-full ${theme === "dark" ? "dark" : ""}`}>
                 <div
                     className="flex flex-col h-full w-full bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100"
                     style={{ fontFamily: "'DM Sans','Segoe UI',system-ui,sans-serif" }}
