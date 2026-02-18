@@ -1,6 +1,6 @@
 {
   "name": "@sajankumarv88/react-calendar",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "description": "A beautiful, fully-featured calendar component for React with month, week, day, and year views.",
   "main": "./dist/index.cjs",
