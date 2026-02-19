@@ -2,6 +2,8 @@
 
 A beautiful, fully-featured calendar component for React with month, week, day, and year views.
 
+![Demo](demo.gif)
+
 ## Installation
 
 ```bash
