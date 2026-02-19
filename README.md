@@ -1,4 +1,4 @@
-# @sajankumarv88/react-calendar
+# React-Calendar
 
 A beautiful, fully-featured calendar component for React with month, week, day, and year views.
 
