@@ -37,7 +37,8 @@ export const MonthView = React.memo(function MonthView({
                         {wk.map((day) => {
                             const inM = isSameMonth(day, cal.cur),
                                 td = isToday(day),
-                                hol = cal.isHol(day);
+                                hol = cal.isHol(day),
+                                wd = cal.isWorkDay(day);
                             const evts = cal.evtsForDay(day),
                                 vis = evts.slice(0, MX),
                                 mn = evts.length - MX;
@@ -46,7 +47,7 @@ export const MonthView = React.memo(function MonthView({
                                     key={day.toISOString()}
                                     onClick={() => onCell(day)}
                                     className={`rcal:min-h-[72px] rcal:sm:min-h-[100px] rcal:p-1 rcal:sm:p-1.5 rcal:border-r rcal:border-zinc-100 rcal:dark:border-zinc-800/50 rcal:last:border-r-0 rcal:cursor-pointer rcal:transition-colors rcal:group rcal:relative
-                    ${!inM ? "rcal:bg-zinc-50/50 rcal:dark:bg-zinc-900/30" : ""} ${hol ? "rcal:bg-rose-50/50 rcal:dark:bg-rose-500/[0.04]" : ""} ${td && !hol ? "rcal:bg-blue-50/40 rcal:dark:bg-blue-500/[0.03]" : ""} rcal:hover:bg-blue-50/70 rcal:dark:hover:bg-blue-500/[0.06]`}
+                    ${!inM ? "rcal:bg-zinc-50/50 rcal:dark:bg-zinc-900/30" : ""} ${hol ? "rcal:bg-rose-50/50 rcal:dark:bg-rose-500/[0.04]" : ""} ${!wd && !hol ? "rcal:bg-zinc-50/80 rcal:dark:bg-zinc-900/40" : ""} ${td && !hol && wd ? "rcal:bg-blue-50/40 rcal:dark:bg-blue-500/[0.03]" : ""} rcal:hover:bg-blue-50/70 rcal:dark:hover:bg-blue-500/[0.06]`}
                                 >
                                     {td && (
                                         <div className="rcal:absolute rcal:inset-0 rcal:ring-inset rcal:ring-2 rcal:ring-blue-400/30 rcal:dark:ring-blue-500/20 rcal:rounded-sm rcal:pointer-events-none" />

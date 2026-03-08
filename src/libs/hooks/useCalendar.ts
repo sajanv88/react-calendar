@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { DAYS_FULL, MONTHS, MONTHS_SHORT } from "../constants";
-import type { CalendarEvent, CalendarHook, CalendarView, WorkHours } from "../types";
+import type { CalendarEvent, CalendarHook, CalendarView, WorkDay, WorkHours } from "../types";
 import {
     addDays,
     addMonths,
@@ -15,14 +15,28 @@ import {
     toISO,
 } from "../utils/date";
 
+const DEFAULT_WORK_WEEK: WorkDay[] = ["monday", "tuesday", "wednesday", "thursday", "friday"];
+
+const DAY_INDEX_MAP: Record<string, number> = {
+    sunday: 0,
+    monday: 1,
+    tuesday: 2,
+    wednesday: 3,
+    thursday: 4,
+    friday: 5,
+    saturday: 6,
+};
+
 export function useCalendar({
     initialEvents = [],
     holidays = [],
     workHours = { start: 9, end: 17 },
+    workWeek = DEFAULT_WORK_WEEK,
 }: {
     initialEvents?: CalendarEvent[];
     holidays?: string[];
     workHours?: WorkHours;
+    workWeek?: WorkDay[];
 }): CalendarHook {
     const [cur, setCur] = useState<Date>(new Date());
     const [view, setView] = useState<CalendarView>("month");
@@ -42,6 +56,8 @@ export function useCalendar({
     const holSet = useMemo(() => new Set(holidays.map((h) => h.slice(0, 10))), [holidays]);
     const isHol = useCallback((d: Date) => holSet.has(toISO(d)), [holSet]);
     const isWH = useCallback((h: number) => h >= workHours.start && h < workHours.end, [workHours]);
+    const workDaySet = useMemo(() => new Set(workWeek.map((d) => DAY_INDEX_MAP[d])), [workWeek]);
+    const isWorkDay = useCallback((d: Date) => workDaySet.has(d.getDay()), [workDaySet]);
 
     const goToday = useCallback(() => setCur(new Date()), []);
     const goPrev = useCallback(() => {
@@ -159,6 +175,7 @@ export function useCalendar({
         allDayForDay,
         isHol,
         isWH,
+        isWorkDay,
         goToday,
         goPrev,
         goNext,

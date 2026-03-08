@@ -100,6 +100,7 @@ function App() {
                             holidays={["2026-12-25", "2026-01-01"]}
                             workHours={{ start: 9, end: 17 }}
                             onEventAdd={handleEventAdd}
+                            workWeek={["monday", "thursday"]}
                         />
                     </div>
                 </div>

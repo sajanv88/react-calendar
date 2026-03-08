@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { CAT_STYLES } from "../styles/categoryStyles";
 import { Fld, iCls } from "../styles/formStyles";
-import type { CalendarEvent, EventCategory } from "../types";
-import { parseISO, toISO } from "../utils/date";
+import type { CalendarEvent, EventCategory, WorkHours } from "../types";
+import { fmtTime, parseISO, toISO } from "../utils/date";
 import { XBtn } from "./icons";
 
 interface EventModalProps {
@@ -12,6 +12,8 @@ interface EventModalProps {
     initDate: Date | null;
     initHour: number | null;
     existing: CalendarEvent | null;
+    workHours: WorkHours;
+    isWorkDay: (d: Date) => boolean;
 }
 
 export const EventModal = React.memo(function EventModal({
@@ -21,6 +23,8 @@ export const EventModal = React.memo(function EventModal({
     initDate,
     initHour,
     existing,
+    workHours,
+    isWorkDay,
 }: EventModalProps) {
     const [t, sT] = useState("");
     const [desc, sD] = useState("");
@@ -30,6 +34,19 @@ export const EventModal = React.memo(function EventModal({
     const [st, sSt] = useState("09:00");
     const [et, sEt] = useState("10:00");
     const [ad, sAd] = useState(false);
+
+    const bookingError = useMemo(() => {
+        if (!date) return null;
+        const d = new Date(`${date}T00:00:00`);
+        if (!isWorkDay(d)) return "Cannot book events on non-working days.";
+        if (ad) return null;
+        const sH = parseInt(st.split(":")[0], 10);
+        const eH = parseInt(et.split(":")[0], 10);
+        const eM = parseInt(et.split(":")[1], 10);
+        if (sH < workHours.start || eH > workHours.end || (eH === workHours.end && eM > 0))
+            return `Events must be within work hours (${fmtTime(workHours.start)} – ${fmtTime(workHours.end)}).`;
+        return null;
+    }, [date, st, et, ad, workHours, isWorkDay]);
 
     useEffect(() => {
         if (!isOpen) return;
@@ -72,7 +89,7 @@ export const EventModal = React.memo(function EventModal({
     }, [isOpen, onClose]);
 
     const submit = useCallback(() => {
-        if (!t.trim()) return;
+        if (!t.trim() || bookingError) return;
         const sI = ad ? `${date}T00:00:00` : `${date}T${st}:00`;
         const eI = ad ? `${date}T23:59:59` : `${date}T${et}:00`;
         onSave({
@@ -89,7 +106,7 @@ export const EventModal = React.memo(function EventModal({
             createdBy: { id: "u-1", name: "You" },
         });
         onClose();
-    }, [t, desc, loc, cat, date, st, et, ad, onSave, onClose, existing]);
+    }, [t, desc, loc, cat, date, st, et, ad, onSave, onClose, existing, bookingError]);
 
     if (!isOpen) return null;
     return (
@@ -186,6 +203,11 @@ export const EventModal = React.memo(function EventModal({
                             </Fld>
                         </div>
                     )}
+                    {bookingError && (
+                        <div className="rcal:px-3 rcal:py-2 rcal:rounded-lg rcal:bg-amber-50 rcal:dark:bg-amber-500/10 rcal:border rcal:border-amber-200 rcal:dark:border-amber-500/20 rcal:text-xs rcal:font-medium rcal:text-amber-700 rcal:dark:text-amber-400">
+                            {bookingError}
+                        </div>
+                    )}
                     <Fld label="Description">
                         <textarea
                             value={desc}
@@ -216,7 +238,7 @@ export const EventModal = React.memo(function EventModal({
                     <button
                         type="button"
                         onClick={submit}
-                        disabled={!t.trim()}
+                        disabled={!t.trim() || !!bookingError}
                         className="rcal:flex-1 rcal:px-4 rcal:py-2.5 rcal:rounded-xl rcal:text-sm rcal:font-medium rcal:text-white rcal:bg-blue-500 rcal:hover:bg-blue-600 rcal:disabled:opacity-40 rcal:disabled:cursor-not-allowed rcal:transition-colors rcal:shadow-lg rcal:shadow-blue-500/25"
                     >
                         {existing ? "Update" : "Create Event"}
