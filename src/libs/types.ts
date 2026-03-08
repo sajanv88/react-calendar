@@ -104,6 +104,25 @@ export interface CalendarProps {
      * @default `false`
      */
     enableThemeToggle?: boolean;
+    /**
+     * When `false`, the delete button is hidden from the event popover.
+     * @default `true`
+     */
+    allowDelete?: boolean;
+    /**
+     * Custom display labels for event categories.
+     * Any category not specified falls back to its default name.
+     * @example
+     * ```tsx
+     * <Calendar categoryLabels={{ work: "Office", personal: "Private", urgent: "High Priority" }} />
+     * ```
+     */
+    categoryLabels?: Partial<Record<EventCategory, string>>;
+    /**
+     * When `false`, hides the "All day event" toggle from the event modal.
+     * @default `true`
+     */
+    allowAllDay?: boolean;
 }
 
 /** An { x, y } screen coordinate used for popover positioning. */

@@ -101,6 +101,11 @@ function App() {
                             workHours={{ start: 9, end: 17 }}
                             onEventAdd={handleEventAdd}
                             workWeek={["monday", "thursday"]}
+                            categoryLabels={{
+                                "work": "Syndoc Demo",
+                            }}
+                            allowAllDay={false}
+                            allowDelete={false}
                         />
                     </div>
                 </div>

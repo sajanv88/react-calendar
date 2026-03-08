@@ -28,6 +28,9 @@ export default function Calendar({
     theme: initialTheme = "light",
     onEventAdd,
     enableThemeToggle,
+    allowDelete = true,
+    categoryLabels,
+    allowAllDay = true,
 }: CalendarProps) {
     const [theme, setTheme] = useState<ThemeMode>(initialTheme);
     const cal = useCalendar({ initialEvents, holidays, workHours, workWeek });
@@ -220,6 +223,8 @@ export default function Calendar({
                         existing={modal.evt}
                         workHours={cal.workHours}
                         isWorkDay={cal.isWorkDay}
+                        categoryLabels={categoryLabels}
+                        allowAllDay={allowAllDay}
                     />
                     {pop && (
                         <EventPop
@@ -227,6 +232,8 @@ export default function Calendar({
                             pos={pop.pos}
                             onClose={() => setPop(null)}
                             onDelete={onDel}
+                            allowDelete={allowDelete}
+                            categoryLabels={categoryLabels}
                         />
                     )}
                 </div>
