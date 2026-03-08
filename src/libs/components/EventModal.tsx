@@ -43,7 +43,7 @@ export const EventModal = React.memo(function EventModal({
         const sH = parseInt(st.split(":")[0], 10);
         const eH = parseInt(et.split(":")[0], 10);
         const eM = parseInt(et.split(":")[1], 10);
-        if (sH < workHours.start || (eH > workHours.end || (eH === workHours.end && eM > 0)))
+        if (sH < workHours.start || eH > workHours.end || (eH === workHours.end && eM > 0))
             return `Events must be within work hours (${fmtTime(workHours.start)} – ${fmtTime(workHours.end)}).`;
         return null;
     }, [date, st, et, ad, workHours, isWorkDay]);

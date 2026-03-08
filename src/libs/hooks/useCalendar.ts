@@ -15,13 +15,7 @@ import {
     toISO,
 } from "../utils/date";
 
-const DEFAULT_WORK_WEEK: WorkDay[] = [
-    "monday",
-    "tuesday",
-    "wednesday",
-    "thursday",
-    "friday",
-];
+const DEFAULT_WORK_WEEK: WorkDay[] = ["monday", "tuesday", "wednesday", "thursday", "friday"];
 
 const DAY_INDEX_MAP: Record<string, number> = {
     sunday: 0,
@@ -62,10 +56,7 @@ export function useCalendar({
     const holSet = useMemo(() => new Set(holidays.map((h) => h.slice(0, 10))), [holidays]);
     const isHol = useCallback((d: Date) => holSet.has(toISO(d)), [holSet]);
     const isWH = useCallback((h: number) => h >= workHours.start && h < workHours.end, [workHours]);
-    const workDaySet = useMemo(
-        () => new Set(workWeek.map((d) => DAY_INDEX_MAP[d])),
-        [workWeek]
-    );
+    const workDaySet = useMemo(() => new Set(workWeek.map((d) => DAY_INDEX_MAP[d])), [workWeek]);
     const isWorkDay = useCallback((d: Date) => workDaySet.has(d.getDay()), [workDaySet]);
 
     const goToday = useCallback(() => setCur(new Date()), []);
