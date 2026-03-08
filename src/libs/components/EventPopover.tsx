@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { MONTHS_SHORT } from "../constants";
 import { gc } from "../styles/categoryStyles";
-import type { CalendarEvent, Position } from "../types";
+import type { CalendarEvent, EventCategory, Position } from "../types";
 import { fmtTime, parseISO } from "../utils/date";
 import { ClockI, PinI, TrashI, UserI, XBtn } from "./icons";
 
@@ -10,11 +10,15 @@ export const EventPop = React.memo(function EventPop({
     onClose,
     onDelete,
     pos,
+    allowDelete = true,
+    categoryLabels,
 }: {
     event: CalendarEvent;
     onClose: () => void;
     onDelete: (id: string) => void;
     pos: Position;
+    allowDelete?: boolean;
+    categoryLabels?: Partial<Record<EventCategory, string>>;
 }) {
     const ref = useRef<HTMLDivElement>(null);
     const c = gc(event);
@@ -81,18 +85,20 @@ export const EventPop = React.memo(function EventPop({
                 <span
                     className={`rcal:inline-flex rcal:items-center rcal:px-2 rcal:py-0.5 rcal:rounded-md rcal:text-[10px] rcal:font-semibold rcal:uppercase rcal:tracking-wider ${c.bg} ${c.tx} ${c.dt}`}
                 >
-                    {event.category}
+                    {categoryLabels?.[event.category] ?? event.category}
                 </span>
-                <button
-                    type="button"
-                    onClick={() => {
-                        onDelete(event.id);
-                        onClose();
-                    }}
-                    className="rcal:w-full rcal:flex rcal:items-center rcal:justify-center rcal:gap-1.5 rcal:mt-1 rcal:px-3 rcal:py-1.5 rcal:rounded-lg rcal:text-xs rcal:font-medium rcal:text-rose-600 rcal:dark:text-rose-400 rcal:bg-rose-50 rcal:dark:bg-rose-500/10 rcal:hover:bg-rose-100 rcal:dark:hover:bg-rose-500/20 rcal:transition-colors"
-                >
-                    <TrashI /> Delete event
-                </button>
+                {allowDelete && (
+                    <button
+                        type="button"
+                        onClick={() => {
+                            onDelete(event.id);
+                            onClose();
+                        }}
+                        className="rcal:w-full rcal:flex rcal:items-center rcal:justify-center rcal:gap-1.5 rcal:mt-1 rcal:px-3 rcal:py-1.5 rcal:rounded-lg rcal:text-xs rcal:font-medium rcal:text-rose-600 rcal:dark:text-rose-400 rcal:bg-rose-50 rcal:dark:bg-rose-500/10 rcal:hover:bg-rose-100 rcal:dark:hover:bg-rose-500/20 rcal:transition-colors"
+                    >
+                        <TrashI /> Delete event
+                    </button>
+                )}
             </div>
         </div>
     );

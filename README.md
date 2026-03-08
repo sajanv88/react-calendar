@@ -65,6 +65,9 @@ function App() {
 | `theme` | `"light" \| "dark"` | `"light"` | Initial theme mode |
 | `onEventAdd` | `(event: CalendarEvent) => void` | - | Callback when an event is added |
 | `enableThemeToggle` | `boolean` | `true` | Show/hide the theme toggle button |
+| `allowDelete` | `boolean` | `true` | When `false`, hides the delete button from the event popover. |
+| `categoryLabels` | `Partial<Record<EventCategory, string>>` | - | Custom display labels for categories (e.g., `{ work: "Office" }`). |
+| `allowAllDay` | `boolean` | `true` | When `false`, hides the "All day event" toggle from the event modal. |
 
 ## Features
 
@@ -76,6 +79,8 @@ function App() {
 - **Holiday Support** — Highlight specific dates as holidays
 - **Work Hours** — Visual distinction for working hours
 - **Work Week** — Define custom work days (e.g., Sun–Thu) with non-work days dimmed
+- **Custom Category Labels** — Rename categories to match your domain
+- **Delete Control** — Optionally hide the delete button to prevent event removal
 - **Overlap Resolution** — Smart layout for overlapping events
 
 ## CalendarEvent Type
@@ -122,6 +127,31 @@ type WorkDay = "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "fri
 **Six-day work week:**
 ```tsx
 <Calendar workWeek={["monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]} />
+```
+
+## Category Labels
+
+Rename the built-in categories to match your domain using the `categoryLabels` prop. Labels appear in both the event modal and the event detail popover.
+
+```tsx
+<Calendar
+  categoryLabels={{
+    work: "Office",
+    personal: "Private",
+    holiday: "Day Off",
+    urgent: "High Priority",
+  }}
+/>
+```
+
+Only the categories you specify are renamed — the rest keep their default names.
+
+## Disable Event Deletion
+
+Set `allowDelete={false}` to hide the delete button from the event detail popover.
+
+```tsx
+<Calendar allowDelete={false} />
 ```
 
 ## Advanced Usage

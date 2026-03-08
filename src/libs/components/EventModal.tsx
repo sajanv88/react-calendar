@@ -14,6 +14,8 @@ interface EventModalProps {
     existing: CalendarEvent | null;
     workHours: WorkHours;
     isWorkDay: (d: Date) => boolean;
+    categoryLabels?: Partial<Record<EventCategory, string>>;
+    allowAllDay?: boolean;
 }
 
 export const EventModal = React.memo(function EventModal({
@@ -25,11 +27,16 @@ export const EventModal = React.memo(function EventModal({
     existing,
     workHours,
     isWorkDay,
+    categoryLabels,
+    allowAllDay = true,
 }: EventModalProps) {
     const [t, sT] = useState("");
     const [desc, sD] = useState("");
     const [loc, sL] = useState("");
-    const [cat, sC] = useState<EventCategory>("work");
+    const allCats: EventCategory[] = ["work", "personal", "holiday", "urgent"];
+    const cats = categoryLabels ? allCats.filter((c) => c in categoryLabels) : allCats;
+    const defaultCat = cats[0];
+    const [cat, sC] = useState<EventCategory>(defaultCat);
     const [date, sDate] = useState("");
     const [st, sSt] = useState("09:00");
     const [et, sEt] = useState("10:00");
@@ -71,13 +78,13 @@ export const EventModal = React.memo(function EventModal({
             sT("");
             sD("");
             sL("");
-            sC("work");
+            sC(defaultCat);
             sDate(toISO(d));
             sAd(false);
             sSt(`${String(h).padStart(2, "0")}:00`);
             sEt(`${String(Math.min(h + 1, 23)).padStart(2, "0")}:00`);
         }
-    }, [isOpen, initDate, initHour, existing]);
+    }, [isOpen, initDate, initHour, existing, defaultCat]);
 
     useEffect(() => {
         if (!isOpen) return;
@@ -144,22 +151,25 @@ export const EventModal = React.memo(function EventModal({
                         />
                     </Fld>
                     <Fld label="Category">
-                        <div className="rcal:grid rcal:grid-cols-4 rcal:gap-2">
-                            {(["work", "personal", "holiday", "urgent"] as EventCategory[]).map(
-                                (c2) => {
-                                    const cc = CAT_STYLES[c2];
-                                    return (
-                                        <button
-                                            type="button"
-                                            key={c2}
-                                            onClick={() => sC(c2)}
-                                            className={`rcal:px-3 rcal:py-2 rcal:rounded-xl rcal:text-xs rcal:font-medium rcal:capitalize rcal:transition-all rcal:border-2 ${cat === c2 ? `${cc.bg} ${cc.bd} ${cc.tx} ${cc.dt}` : "rcal:border-transparent rcal:bg-zinc-100 rcal:dark:bg-zinc-800 rcal:text-zinc-500 rcal:dark:text-zinc-400 rcal:hover:bg-zinc-200 rcal:dark:hover:bg-zinc-700"}`}
-                                        >
-                                            {c2}
-                                        </button>
-                                    );
-                                }
-                            )}
+                        <div
+                            className="rcal:grid rcal:gap-2"
+                            style={{
+                                gridTemplateColumns: `repeat(${cats.length}, minmax(0, 1fr))`,
+                            }}
+                        >
+                            {cats.map((c2) => {
+                                const cc = CAT_STYLES[c2];
+                                return (
+                                    <button
+                                        type="button"
+                                        key={c2}
+                                        onClick={() => sC(c2)}
+                                        className={`rcal:px-3 rcal:py-2 rcal:rounded-xl rcal:text-xs rcal:font-medium rcal:capitalize rcal:transition-all rcal:border-2 ${cat === c2 ? `${cc.bg} ${cc.bd} ${cc.tx} ${cc.dt}` : "rcal:border-transparent rcal:bg-zinc-100 rcal:dark:bg-zinc-800 rcal:text-zinc-500 rcal:dark:text-zinc-400 rcal:hover:bg-zinc-200 rcal:dark:hover:bg-zinc-700"}`}
+                                    >
+                                        {categoryLabels?.[c2] ?? c2}
+                                    </button>
+                                );
+                            })}
                         </div>
                     </Fld>
                     <Fld label="Date">
@@ -170,19 +180,21 @@ export const EventModal = React.memo(function EventModal({
                             className={iCls}
                         />
                     </Fld>
-                    <label className="rcal:flex rcal:items-center rcal:gap-3 rcal:cursor-pointer rcal:select-none">
-                        <div
-                            className={`rcal:relative rcal:w-10 rcal:h-6 rcal:rounded-full rcal:transition-colors ${ad ? "rcal:bg-blue-500" : "rcal:bg-zinc-300 rcal:dark:bg-zinc-600"}`}
-                            onClick={() => sAd(!ad)}
-                        >
+                    {allowAllDay && (
+                        <label className="rcal:flex rcal:items-center rcal:gap-3 rcal:cursor-pointer rcal:select-none">
                             <div
-                                className={`rcal:absolute rcal:top-0.5 rcal:w-5 rcal:h-5 rcal:bg-white rcal:rounded-full rcal:shadow-md rcal:transition-transform ${ad ? "rcal:translate-x-[18px]" : "rcal:translate-x-0.5"}`}
-                            />
-                        </div>
-                        <span className="rcal:text-sm rcal:text-zinc-600 rcal:dark:text-zinc-300">
-                            All day event
-                        </span>
-                    </label>
+                                className={`rcal:relative rcal:w-10 rcal:h-6 rcal:rounded-full rcal:transition-colors ${ad ? "rcal:bg-blue-500" : "rcal:bg-zinc-300 rcal:dark:bg-zinc-600"}`}
+                                onClick={() => sAd(!ad)}
+                            >
+                                <div
+                                    className={`rcal:absolute rcal:top-0.5 rcal:w-5 rcal:h-5 rcal:bg-white rcal:rounded-full rcal:shadow-md rcal:transition-transform ${ad ? "rcal:translate-x-[18px]" : "rcal:translate-x-0.5"}`}
+                                />
+                            </div>
+                            <span className="rcal:text-sm rcal:text-zinc-600 rcal:dark:text-zinc-300">
+                                All day event
+                            </span>
+                        </label>
+                    )}
                     {!ad && (
                         <div className="rcal:grid rcal:grid-cols-2 rcal:gap-3">
                             <Fld label="Start">
