@@ -129,7 +129,7 @@ type WorkDay = "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "fri
 You can use the `useCalendar` hook directly for custom implementations:
 
 ```tsx
-import { useCalendar } from "@sajanv88/react-calendar";
+import { useCalendar } from "@sajankumarv88/react-calendar";
 
 function MyCalendar() {
   const cal = useCalendar({
