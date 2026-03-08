@@ -31,13 +31,14 @@ export const WeekView = React.memo(function WeekView({
                     <div className="rcal:py-2 rcal:border-r rcal:border-zinc-100 rcal:dark:border-zinc-800" />
                     {cal.weekDays.map((day) => {
                         const td = isToday(day),
-                            hol = cal.isHol(day);
+                            hol = cal.isHol(day),
+                            wd = cal.isWorkDay(day);
                         return (
                             <div
                                 key={day.toISOString()}
-                                className={`rcal:py-2 rcal:text-center rcal:border-r rcal:border-zinc-100 rcal:dark:border-zinc-800/50 rcal:last:border-r-0 rcal:transition-colors ${td ? "rcal:bg-blue-50/50 rcal:dark:bg-blue-500/[0.04]" : ""}`}
+                                className={`rcal:py-2 rcal:text-center rcal:border-r rcal:border-zinc-100 rcal:dark:border-zinc-800/50 rcal:last:border-r-0 rcal:transition-colors ${td ? "rcal:bg-blue-50/50 rcal:dark:bg-blue-500/[0.04]" : ""} ${!wd && !td ? "rcal:bg-zinc-50/80 rcal:dark:bg-zinc-900/40" : ""}`}
                             >
-                                <div className="rcal:text-[10px] rcal:font-semibold rcal:uppercase rcal:tracking-wider rcal:text-zinc-400 rcal:dark:text-zinc-500">
+                                <div className={`rcal:text-[10px] rcal:font-semibold rcal:uppercase rcal:tracking-wider ${!wd ? "rcal:text-zinc-300 rcal:dark:text-zinc-600" : "rcal:text-zinc-400 rcal:dark:text-zinc-500"}`}>
                                     {DAYS[day.getDay()]}
                                 </div>
                                 <div
@@ -78,12 +79,13 @@ export const WeekView = React.memo(function WeekView({
                     </div>
                     {cal.weekDays.map((day) => {
                         const td = isToday(day),
-                            hol = cal.isHol(day);
+                            hol = cal.isHol(day),
+                            wd = cal.isWorkDay(day);
                         const pos = layoutEvts(cal.timedForDay(day));
                         return (
                             <div
                                 key={day.toISOString()}
-                                className="rcal:relative rcal:border-r rcal:border-zinc-100 rcal:dark:border-zinc-800/40 rcal:last:border-r-0"
+                                className={`rcal:relative rcal:border-r rcal:border-zinc-100 rcal:dark:border-zinc-800/40 rcal:last:border-r-0 ${!wd ? "rcal:bg-zinc-50/60 rcal:dark:bg-zinc-900/30" : ""}`}
                             >
                                 {cal.hours.map((h) => {
                                     const iw = cal.isWH(h);

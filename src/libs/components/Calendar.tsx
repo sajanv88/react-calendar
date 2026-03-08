@@ -24,12 +24,13 @@ export default function Calendar({
     initialEvents = SAMPLE_EVENTS,
     holidays = DEFAULT_HOLIDAYS,
     workHours = DEFAULT_WORK_HOURS,
+    workWeek,
     theme: initialTheme = "light",
     onEventAdd,
     enableThemeToggle,
 }: CalendarProps) {
     const [theme, setTheme] = useState<ThemeMode>(initialTheme);
-    const cal = useCalendar({ initialEvents, holidays, workHours });
+    const cal = useCalendar({ initialEvents, holidays, workHours, workWeek });
 
     const [modal, setModal] = useState<ModalState>({
         open: false,
@@ -217,6 +218,8 @@ export default function Calendar({
                         initDate={modal.date}
                         initHour={modal.hour}
                         existing={modal.evt}
+                        workHours={cal.workHours}
+                        isWorkDay={cal.isWorkDay}
                     />
                     {pop && (
                         <EventPop

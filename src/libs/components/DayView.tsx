@@ -24,7 +24,8 @@ export const DayView = React.memo(function DayView({
         if (gRef.current) gRef.current.scrollTop = cal.workHours.start * HOUR_H - 16;
     }, [cal.workHours.start]);
     const hol = cal.isHol(cal.cur),
-        td = isToday(cal.cur);
+        td = isToday(cal.cur),
+        wd = cal.isWorkDay(cal.cur);
     const pos = layoutEvts(cal.timedForDay(cal.cur));
     return (
         <div className="rcal:flex rcal:flex-col rcal:h-full rcal:w-full">
@@ -55,7 +56,7 @@ export const DayView = React.memo(function DayView({
                                     key={h}
                                     onPointerDown={gh.dn}
                                     onPointerUp={(e) => gh.up(cal.cur, h, e)}
-                                    className={`rcal:absolute rcal:left-0 rcal:right-0 rcal:border-b rcal:border-zinc-100 rcal:dark:border-zinc-800/30 rcal:cursor-pointer rcal:transition-colors ${iw ? "rcal:bg-blue-50/30 rcal:dark:bg-blue-500/[0.02]" : ""} ${hol ? "rcal:bg-rose-50/30 rcal:dark:bg-rose-500/[0.02]" : ""} rcal:hover:bg-blue-100/40 rcal:dark:hover:bg-blue-500/[0.06]`}
+                                    className={`rcal:absolute rcal:left-0 rcal:right-0 rcal:border-b rcal:border-zinc-100 rcal:dark:border-zinc-800/30 rcal:cursor-pointer rcal:transition-colors ${iw && wd ? "rcal:bg-blue-50/30 rcal:dark:bg-blue-500/[0.02]" : ""} ${hol ? "rcal:bg-rose-50/30 rcal:dark:bg-rose-500/[0.02]" : ""} ${!wd && !hol ? "rcal:bg-zinc-50/80 rcal:dark:bg-zinc-900/40" : ""} rcal:hover:bg-blue-100/40 rcal:dark:hover:bg-blue-500/[0.06]`}
                                     style={{ top: h * HOUR_H, height: HOUR_H }}
                                 />
                             );

@@ -43,6 +43,7 @@ function App() {
         initialEvents={events}
         holidays={["2026-12-25", "2026-01-01"]}
         workHours={{ start: 9, end: 17 }}
+        workWeek={["monday", "tuesday", "wednesday", "thursday", "friday"]}
         theme="light"
         onEventAdd={handleEventAdd}
       />
@@ -60,6 +61,7 @@ function App() {
 | `initialEvents` | `CalendarEvent[]` | Sample events | Initial events to display |
 | `holidays` | `string[]` | `[]` | ISO date strings for holidays (e.g., `['2026-12-25']`) |
 | `workHours` | `{ start: number; end: number }` | `{ start: 9, end: 17 }` | Work hours range (24hr format) |
+| `workWeek` | `WorkDay[]` | `['monday', …, 'friday']` | Days considered as working days. Non-work days are visually dimmed. |
 | `theme` | `"light" \| "dark"` | `"light"` | Initial theme mode |
 | `onEventAdd` | `(event: CalendarEvent) => void` | - | Callback when an event is added |
 | `enableThemeToggle` | `boolean` | `true` | Show/hide the theme toggle button |
@@ -73,6 +75,7 @@ function App() {
 - **Responsive** — Mobile-friendly with automatic view adjustment
 - **Holiday Support** — Highlight specific dates as holidays
 - **Work Hours** — Visual distinction for working hours
+- **Work Week** — Define custom work days (e.g., Sun–Thu) with non-work days dimmed
 - **Overlap Resolution** — Smart layout for overlapping events
 
 ## CalendarEvent Type
@@ -98,6 +101,29 @@ interface CalendarEvent {
 }
 ```
 
+## Work Week
+
+The `workWeek` prop lets you define which days of the week are working days. Non-work days are visually dimmed across all views (month, week, day, year). Accepts an array of lowercase day names.
+
+```tsx
+type WorkDay = "sunday" | "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday";
+```
+
+**Standard Mon–Fri (default):**
+```tsx
+<Calendar workWeek={["monday", "tuesday", "wednesday", "thursday", "friday"]} />
+```
+
+**Sun–Thu (Middle East):**
+```tsx
+<Calendar workWeek={["sunday", "monday", "tuesday", "wednesday", "thursday"]} />
+```
+
+**Six-day work week:**
+```tsx
+<Calendar workWeek={["monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]} />
+```
+
 ## Advanced Usage
 
 You can use the `useCalendar` hook directly for custom implementations:
@@ -110,6 +136,7 @@ function MyCalendar() {
     initialEvents: [],
     holidays: ["2026-12-25"],
     workHours: { start: 9, end: 17 },
+    workWeek: ["monday", "tuesday", "wednesday", "thursday", "friday"],
   });
 
   // Build your own UI using cal.monthGrid, cal.events, etc.

@@ -17,5 +17,6 @@ export type {
     EventCategory,
     Recurrence,
     ThemeMode,
+    WorkDay,
     WorkHours,
 } from "./libs/types";
